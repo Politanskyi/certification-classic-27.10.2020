@@ -4,7 +4,7 @@
 
 const paths = require('./config/paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const webpack = require('webpack');
 // -----------------------------------------------------------------------------
 // Configuration for IDE/Editor
 // -----------------------------------------------------------------------------
@@ -49,6 +49,12 @@ module.exports = {
 			title: 'Certification (Classic) 27.10.2020',
 			template: paths.src.tpl + '/index.html',
 			filename: 'index.html'
+		}),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+			'window.jQuery': 'jquery',
+			'window.$': 'jquery'
 		})
 	]
 };
