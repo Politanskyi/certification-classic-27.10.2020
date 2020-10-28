@@ -6,13 +6,19 @@ function generateYears (yearFrom, yearTo) {
     let years = {};
     for (let i = yearFrom; i <= yearTo; i++) {
         let decade = Math.floor(i / 10) * 10;
+
+        if (decade < 2000) {
+            decade = decade.toString().replace('19', '') + '-ые';
+        } else {
+            decade = decade.toString().replace(/(0)+/, 'k');
+        }
+
         years[decade] = $.merge(years[decade] || [], [i]);
     }
     return years;
 }
 
-function pushFilter () {
-    let yearFilter = $('#filter-year');
+export function pushFilter (yearFilter) {
     for (let key in yearsArr) {
         yearFilter.append(`<option disabled>${key}</option>`);
         for (let i = 0; i < yearsArr[key].length; i++) {
@@ -20,5 +26,3 @@ function pushFilter () {
         }
     }
 }
-
-pushFilter();

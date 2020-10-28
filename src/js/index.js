@@ -6,8 +6,9 @@
 import 'sass/style.scss';
 // use full
 import { generateYears } from 'js#/usefull/years-filter';
+import {pushFilter} from 'js/usefull/years-filter'
 
 // -----------------------------------------------------------------------------
 // Initialize
 // -----------------------------------------------------------------------------
-
+pushFilter($('#filter-year'));
