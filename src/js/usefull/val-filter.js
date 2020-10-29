@@ -6,16 +6,16 @@ export function getFilterVal () {
     const filterData = new FormData(filter[0]);
     let filterVal = {
         params: {
-                brand: filterData.getAll('brand');
-                manufacturer: filterData.get('manufacturer');
-                model: filterData.get('model');
-                year: Number(filterData.get('year'));
-                price: filterData.getAll('price').map((str) => Number(str));
+                brand: filterData.getAll('brand'),
+                manufacturer: filterData.get('manufacturer'),
+                model: filterData.get('model'),
+                year: Number(filterData.get('year')),
+                price: filterData.getAll('price').map((str) => Number(str))
                 },
         pagination: {
-                sort: filterData.get('sort');
-                perPage: Number(filterData.get('perPage'));
-                page: Number(pageNum);
+                sort: filterData.get('sort'),
+                perPage: Number(filterData.get('perPage')),
+                page: Number(pageNum)
                 }
         };
 
