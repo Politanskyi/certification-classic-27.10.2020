@@ -1,36 +1,37 @@
+import { filter } from "js#/usefull/years-filter";
+
 export function getFilterVal () {
-    let filterVal = {params: {}, pagination: {}};
+
     let filterArr = $('.js-filters').find('input, select');
-    let pageNum = $('.pagination__number--current');
+    let pageNum = $('.pagination__number--current').find('span').text();
+    const filterData = new FormData(filter[0]);
+    let filterVal = {
+        params: {},
+        pagination: {}
+    };
 
     filterArr.each(function (index, element) {
-        let elem = $(element);
-        //console.log(elem.attr('name'));
-        //console.log(elem.val());
+        let el = $(element);
+        let elName = el.attr('name');
 
-        if (elem.val()) {
-            if (elem.attr('name') === 'brand') {
-
+        if (el.val()) {
+            if (elName === 'brand') {
+                filterVal.params[elName] = filterData.getAll(elName);
+            } else if (elName === 'manufacturer') {
+                filterVal.params[elName] = filterData.get(elName);
+            } else if (elName === 'model') {
+                filterVal.params[elName] = filterData.get(elName);
+            } else if (elName === 'year') {
+                filterVal.params[elName] = Number(filterData.get(elName));
+            } else if (elName === 'price') {
+                filterVal.params[elName] = filterData.getAll(elName).map((str) => Number(str));
+            } else if (elName === 'sort') {
+                filterVal.pagination[elName] = filterData.get(elName);
+            } else if (elName === 'perPage') {
+                filterVal.pagination[elName] = Number(filterData.get(elName));
             }
-            filterVal[elem.attr('name')] = elem.val();
+            filterVal.pagination.page = Number(pageNum);
         }
-
     });
-
-    //console.log(filterVal);
-}
-
-let example = {
-    params: {
-        brand: ['string', 'string'],
-        manufacturer: 'string',
-        model: 'string',
-        year: 1992,
-        price: [100, 3000]
-    },
-    pagination: {
-        sort: 'string',
-        perPage: 10,
-        page: 3
-    }
+    console.log(filterVal);
 }

@@ -1,6 +1,8 @@
 @import 'settings/all';
 
 .filter-set {
+	position: relative;
+	z-index: 2;
 	border-width: 0;
 	font-size: microbe-rem(14);
 	padding: microbe-em(20, 14);
@@ -21,4 +23,9 @@
 			display: block;
 		}
 	}
+}
+
+.sort {
+	position: relative;
+	z-index: 2;
 }

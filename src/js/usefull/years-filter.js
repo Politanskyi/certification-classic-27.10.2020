@@ -32,7 +32,7 @@ export function pushFilter (yearFilter) {
 }
 
 const filterBtn = $('[data-button-show]');
-const filter = $('#filter');
+export const filter = $('#filter');
 
 filterBtn.on('click', function () {
     filter.slideToggle(300, function (){
