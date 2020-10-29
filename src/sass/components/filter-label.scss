@@ -1,12 +1,20 @@
 @import 'settings/all';
 
-.filter-label {
-	display: block;
-	padding: 0.5rem;
-	margin-left: -0.5em;
+#filter {
+  display: none;
 
-	&:hover {
-		background-color: $background-hover;
-		cursor: pointer;
-	}
+  @media screen and(min-width: 768px) {
+    display: block !important;
+  }
+}
+
+.filter-label {
+  display: block;
+  padding: 0.5rem;
+  margin-left: -0.5em;
+
+  &:hover {
+    background-color: $background-hover;
+    cursor: pointer;
+  }
 }

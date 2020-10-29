@@ -20,9 +20,26 @@ function generateYears (yearFrom, yearTo) {
 
 export function pushFilter (yearFilter) {
     for (let key in yearsArr) {
-        yearFilter.append(`<option disabled>${key}</option>`);
+        let optGroup = `<optgroup label="${key}">`;
+
         for (let i = 0; i < yearsArr[key].length; i++) {
-            yearFilter.append(`<option>${yearsArr[key][i]}</option>`);
+            optGroup += `<option>${yearsArr[key][i]}</option>`;
         }
+
+        optGroup += `</optgroup>`;
+        yearFilter.append(optGroup);
     }
 }
+
+const filterBtn = $('[data-button-show]');
+const filter = $('#filter');
+
+filterBtn.on('click', function () {
+    filter.slideToggle(300, function (){
+        if (filter.is(':visible')) {
+            filterBtn.text('Скрыть фильтр');
+        } else {
+            filterBtn.text('Показать фильтр');
+        }
+    });
+})

@@ -12,7 +12,9 @@ module.exports = {
 	src: {
 		js: fromCWD('src/js'),
 		sass: fromCWD('src/sass'),
-		tpl: fromCWD('src/template')
+		tpl: fromCWD('src/template'),
+		images: fromCWD('src/images'),
+		svg: fromCWD('src/svg')
 	},
 	build: {
 		content: fromCWD('/public'),

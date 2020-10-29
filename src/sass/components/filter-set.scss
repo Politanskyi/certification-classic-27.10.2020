@@ -12,4 +12,13 @@
 		font-style: italic;
 		margin-bottom: microbe-em(8, 16);
 	}
+
+	&__controls {
+		display: inline-flex;
+		flex-wrap: wrap;
+
+		@media screen and (min-width: 768px){
+			display: block;
+		}
+	}
 }

@@ -10,11 +10,9 @@
 	}
 
 	&__decor {
-		position: absolute;
-		width: microbe-rem(280);
-		height: microbe-rem(160);
-		top: microbe-rem(-70);
-		left: 50%;
-		margin-left: microbe-rem(-140);
+		width: 17.5rem;
+		height: 10rem;
+		display: block;
+		margin: 0 auto;
 	}
 }
