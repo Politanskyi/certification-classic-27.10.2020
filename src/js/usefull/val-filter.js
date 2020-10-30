@@ -2,22 +2,26 @@ import { filter } from "js#/usefull/years-filter";
 
 export function getFilterVal () {
 
+    let filterArr = $('.js-filters').find('input, select');
     let pageNum = $('.pagination__number--current').find('span').text();
+    let param = [];
     const filterData = new FormData(filter[0]);
     let filterVal = {
-        params: {
-                brand: filterData.getAll('brand'),
-                manufacturer: filterData.get('manufacturer'),
-                model: filterData.get('model'),
-                year: Number(filterData.get('year')),
-                price: filterData.getAll('price').map((str) => Number(str))
-                },
-        pagination: {
-                sort: filterData.get('sort'),
-                perPage: Number(filterData.get('perPage')),
-                page: Number(pageNum)
-                }
-        };
+        params: {},
+        pagination: {}
+    };
 
+    filterArr.each(function (index, element) {
+        let el = $(element);
+        let elName = el.attr('name');
+        param.push(elName);
+
+        if (el.val()) {
+            if (elName === 'brand' || elName === 'price' || elName === 'manufacturer' || elName === 'model' || elName === 'year')
+                filterVal.params[elName] = filterData.getAll(elName);
+        }
+    });
+
+    console.log(param);
     console.log(filterVal);
 }
