@@ -18,7 +18,7 @@ function generateYears (yearFrom, yearTo) {
     return years;
 }
 
-export function pushFilter (yearFilter) {
+export function pushFilter (elements) {
     for (let key in yearsArr) {
         let optGroup = `<optgroup label="${key}">`;
 
@@ -27,7 +27,7 @@ export function pushFilter (yearFilter) {
         }
 
         optGroup += `</optgroup>`;
-        yearFilter.append(optGroup);
+        elements.append(optGroup);
     }
 }
 
