@@ -53,7 +53,7 @@ export function getFilterVal () {
         }
     }
 
-    //console.log(filterVal);
+    console.log(filterVal);
     return filterVal;
 }
 
