@@ -1,13 +1,13 @@
 'use strict';
 
-let grid = document.querySelector('[data-card-grid]');
+let grid = $('[data-card-grid]');
 let card = document.querySelector('[data-render-card]').content;
-let cardBrand = card.querySelector('.card__brand');
-let cardImage = card.querySelector('.card__image');
-let cardManufacturer = card.querySelector('.card__manufacturer');
-let cardYear = card.querySelector('.card__year');
-let cardModel = card.querySelector('.card__model');
-let cardPrice = card.querySelector('.card__price');
+let cardBrand = $(card).find('.card__brand');
+let cardImage = $(card).find('.card__image');
+let cardManufacturer = $(card).find('.card__manufacturer');
+let cardYear = $(card).find('.card__year');
+let cardModel = $(card).find('.card__model');
+let cardPrice = $(card).find('.card__price');
 
 function supportsTemplate () {
     return 'content' in document.createElement('template');
@@ -17,15 +17,19 @@ export function cardRenderStart (data) {
     if (supportsTemplate()) {
 
         for (let key in data) {
-            cardBrand.textContent = data[key].brand.name;
-            cardImage.src = data[key].image.sizes['card-preview'];
-            cardImage.setAttribute('alt', data[key].image.alt);
-            cardManufacturer.textContent = data[key].manufacturer.name;
-            cardYear.textContent = `${data[key].year} год`;
-            cardModel.textContent = data[key].model.name;
-            cardPrice.textContent = `${data[key].price.currency.symbol}${data[key].price.value}`;
+            let elem = data[key];
 
-            grid.appendChild(card.cloneNode(true));
+            cardBrand.text(elem.brand.name);
+            cardImage.attr({
+                alt: elem.image.alt,
+                src: elem.image.sizes['card-preview']
+            });
+            cardManufacturer.text(elem.manufacturer.name);
+            cardYear.text(`${elem.year} год`);
+            cardModel.text(elem.model.name);
+            cardPrice.text(`${elem.price.currency.symbol}${elem.price.value}`);
+
+            grid.append(card.cloneNode(true));
         }
     }
 }
@@ -35,9 +39,11 @@ export function cardRenderData (filterObject, data) {
         let params = filterObject.params;
 
         for (let key in params) {
+            let paramsKey = params[key];
+
             switch (key) {
                 case 'brand':
-                    let brands = params[key];
+                    let brands = paramsKey;
                     data = data.filter((elem) => {
                         if (brands.includes(elem.brand.id.toString())) {
                             return elem;
@@ -53,16 +59,24 @@ export function cardRenderData (filterObject, data) {
 }
 
 function cardRender (data) {
+    console.log('render start');
+    grid.empty();
+    console.log('grid was clear');
 
     for (let key in data) {
-        cardBrand.textContent = data[key].brand.name;
-        cardImage.src = data[key].image.sizes['card-preview'];
-        cardImage.setAttribute('alt', data[key].image.alt);
-        cardManufacturer.textContent = data[key].manufacturer.name;
-        cardYear.textContent = `${data[key].year} год`;
-        cardModel.textContent = data[key].model.name;
-        cardPrice.textContent = `${data[key].price.currency.symbol}${data[key].price.value}`;
+        console.log('grid new items');
+        let elem = data[key];
 
-        grid.appendChild(card.cloneNode(true));
+        cardBrand.text(elem.brand.name);
+        cardImage.attr({
+            alt: elem.image.alt,
+            src: elem.image.sizes['card-preview']
+        });
+        cardManufacturer.text(elem.manufacturer.name);
+        cardYear.text(`${elem.year} год`);
+        cardModel.text(elem.model.name);
+        cardPrice.text(`${elem.price.currency.symbol}${elem.price.value}`);
+
+        grid.append(card.cloneNode(true));
     }
 }
